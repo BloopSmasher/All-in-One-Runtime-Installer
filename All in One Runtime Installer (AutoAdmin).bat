@@ -38,27 +38,30 @@ TASKLIST | FINDSTR "Dism.exe TiWorker.exe" >NUL && TASKKILL /F /IM "Dism.exe" /I
 @echo off
 CD /d %~dp0
 
-CALL "Visual-C-Runtimes\Install All Visual C++ Redistributable Runtimes.bat"
-CALL "DirectX-Redist-Jun-2010\DirectX Runtime Offline Installer.bat"
-CALL ".Net-Installers\.Net Installer.bat"
+@REM CALL "Visual-C-Runtimes\Install All Visual C++ Redistributable Runtimes.bat"
+@REM CALL "DirectX-Redist-Jun-2010\DirectX Runtime Offline Installer.bat"
+@REM CALL ".Net-Installers\.Net Installer.bat"
+CALL "Other-Runtimes\Other-Runtime-Installer.bat"
 
 ECHO Successfully installed all Microsoft's Visual C Runtimes, DotNet SDK LTS Runtimes, and DirectX!
 ECHO.
 
 ENDLOCAL
 
-@echo off
 setlocal enabledelayedexpansion
+
+echo.
+echo A Reboot will be required to finish the Installation..
+echo.
 
 for /l %%i in (10,-1,1) do (
     cls
-	echo A Reboot will be required to finish the Installation..
     echo Your computer will be restarted in %%i seconds.
     echo Press "N" to cancel or "R" to reboot immediately.
     choice /c NRT /t 1 /d T > nul
     if !errorlevel! equ 1 (
-        cls
-		ENDLOCAL
+        echo.
+        ENDLOCAL
         echo Restart Canceled. You can reboot later.
         echo.
         echo Press any key to exit...
@@ -67,10 +70,10 @@ for /l %%i in (10,-1,1) do (
     ) else if !errorlevel! equ 2 (
         goto :reboot
     )
+    echo.
 )
 
 :reboot
-cls
 ENDLOCAL
 echo Restarting now...
 shutdown /r /t 0
