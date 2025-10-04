@@ -38,9 +38,9 @@ TASKLIST | FINDSTR "Dism.exe TiWorker.exe" >NUL && TASKKILL /F /IM "Dism.exe" /I
 @echo off
 CD /d %~dp0
 
-@REM CALL "Visual-C-Runtimes\Install All Visual C++ Redistributable Runtimes.bat"
-@REM CALL "DirectX-Redist-Jun-2010\DirectX Runtime Offline Installer.bat"
-@REM CALL ".Net-Installers\.Net Installer.bat"
+CALL "Visual-C-Runtimes\Install All Visual C++ Redistributable Runtimes.bat"
+CALL "DirectX-Redist-Jun-2010\DirectX Runtime Offline Installer.bat"
+CALL ".Net-Installers\.Net Installer.bat"
 CALL "Other-Runtimes\Other-Runtime-Installer.bat"
 
 ECHO Successfully installed all Microsoft's Visual C Runtimes, DotNet SDK LTS Runtimes, and DirectX!
